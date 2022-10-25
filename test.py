@@ -2,7 +2,6 @@ import gps_funktion
 import umqtt_robust2 as mqtt
 from machine import Pin, ADC
 from time import sleep
-import simple_gps_example
 
 analog_Pin = ADC(Pin(34))
 analog_Pin.atten(ADC.ATTN_11DB)
@@ -17,7 +16,7 @@ while True:
         
         #For at sende beskeder til andre feeds kan det gøres sådan:
         #Indsæt eget username og feednavn til så det svarer til dit eget username og feed du har oprettet
-        mqtt.web_print(gps_data, 'Royaro/feeds/mapfeed/csv')
+        mqtt.web_print(gps_data, 'Kasperfcb/feeds/mapfeed/csv')
         
         #For at vise lokationsdata på adafruit dashboard skal det sendes til feed med /csv til sidst
         #For at sende til GPS lokationsdata til et feed kaldet mapfeed kan det gøres således:
