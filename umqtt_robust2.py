@@ -5,24 +5,11 @@ import network
 import os
 import _thread
 from time import sleep
-import globalVar
-
+from time import ticks_ms
 print("Forbinder til internettet...")
 
-def webPrint2():
-    globalVar.killThread = 1
-    c.publish(topic=mqtt_feedname, msg=str(globalVar.text))
-    sleep(3)
-    globalVar.killThread = 0
-    _thread.exit()
-    
-def web_Print(text):
-    if globalVar.killThread == 0:
-        globalVar.text = text
-        _thread.start_new_thread(webPrint2, ())
 
-
-def syncWithAdafruitIO(): 
+def sync_with_adafruitIO(): 
     # haandtere fejl i forbindelsen og hvor ofte den skal forbinde igen
     if c.is_conn_issue():
         while c.is_conn_issue():
@@ -105,7 +92,25 @@ c.MSG_QUEUE_MAX = 2
 
 c.set_callback(sub_cb)
 
-mqtt_feedname = bytes('{:s}/feeds/{:s}'.format(ADAFRUIT_USERNAME, ADAFRUIT_IO_FEEDNAME), 'utf-8')
+mqtt_feedname = '{:s}/feeds/{:s}'.format(ADAFRUIT_USERNAME, ADAFRUIT_IO_FEEDNAME)
+
+killThread = 0
+
+def web_print2(text_in, feed):
+    global killThread
+    killThread = 1
+    c.publish(topic=bytes(feed, 'utf-8'), msg=str(text_in))
+    sleep(2)
+    killThread = 0
+    _thread.exit()
+    
+def web_print(text_in, feed = mqtt_feedname):
+    if killThread == 0:
+        #print(f"starting new thread \ntext_in: {text_in} \nfeed: {feed} \n killThread: {killThread}")
+        _thread.start_new_thread(web_print2, (text_in, feed))
+    else:
+        print(f"Not sending: \nMessage: {text_in} \nTo feed: {feed}  \nplease wait 3 seconds or more before sending the next message.")
+
 
 if not c.connect(clean_session=False):
     print("Forbinder til Adafruit IO, med klient ID: ",random_num)
