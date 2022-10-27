@@ -67,7 +67,7 @@ while True:
         mqtt.sync_with_adafruitIO()
         print(".", end = ' ')
         
-    except KeyboardInterrupt:
+    except KeyboardInterupt:
         print('Ctrl-C pressed...exiting')
         mqtt.c.disconnect()
         mqtt.sys.exit()
