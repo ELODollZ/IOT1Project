@@ -4,7 +4,6 @@ import _thread
 from time import sleep
 # denne variabel opdateres til at holde gps data
 gps_to_adafruit = None
-totalSatellite = 0
 # instans af gps klassen opdateres her
 gps = None
 def gps_main():
@@ -18,17 +17,16 @@ def gps_main():
                 gps.update(chr(char)) # Note the conversion to to chr, UART outputs ints normally
         
         #different gps methods that can be used:
-       try:
-           #print('UTC Timestamp:', gps.timestamp)
-           #print('Date:', gps.date_string('long'))
-           print('Satellites:', gps.satellites_in_use)
-           #print('Altitude:', gps.altitude)
-           #print('Latitude:', gps.latitude_string())
-           #print('Longitude:', gps.longitude_string())
-           #print('Horizontal Dilution of Precision:', gps.hdop)
-           #print('Compas direction: ', gps.compass_direction())
-           #sleep(2)
-           break 
+        
+        #print('UTC Timestamp:', gps.timestamp)
+        #print('Date:', gps.date_string('long'))
+        print('Satellites:', gps.satellites_in_use)
+        sleep(7)
+        #print('Altitude:', gps.altitude)
+        #print('Latitude:', gps.latitude_string())
+        #print('Longitude:', gps.longitude_string())
+        #print('Horizontal Dilution of Precision:', gps.hdop)
+        #print('Compas direction: ', gps.compass_direction())
         
         formattedLat = gps.latitude_string()
         formattedLat = formattedLat[:-3]
@@ -48,6 +46,4 @@ def gps_main():
 #gps_main()
 _thread.start_new_thread(gps_main, ())
 
-def totalSatellites():
-    Satellite = gps.satellites_in_use
-    mqtt.web_print(Satellite, 'Kasperfcb/feeds/IOT/csv')
+
