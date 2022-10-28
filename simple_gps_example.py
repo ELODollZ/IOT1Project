@@ -12,18 +12,12 @@ def gps_main():
 # Note the conversion to to chr, UART outputs ints normally
             gps.update(chr(char))
             
-        #print('UTC Timestamp:', gps.timestamp)
-        #print('Date:', gps.date_string('long'))
-        #print('Satellites:', gps.satellites_in_use)
-        #print('Altitude:', gps.altitude)
-        #print('Latitude:', gps.latitude_string())
-        #print('Longitude:', gps.longitude_string())
-        #print('Horizontal Dilution of Precision:', gps.hdop)
-        #sleep(1)
+        print('UTC Timestamp:', gps.timestamp)
+        print('Date:', gps.date_string('long'))
+        print('Satellites:', gps.satellites_in_use)
+        print('Altitude:', gps.altitude)
+        print('Latitude:', gps.latitude_string())
+        print('Longitude:', gps.longitude_string())
+        print('Horizontal Dilution of Precision:', gps.hdop)
+        sleep(1)
 gps_main()
-        
-
-
-
-
-

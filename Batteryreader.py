@@ -1,18 +1,21 @@
 from time import sleep
-import umqtt_robust2 as mqtt
 from machine import Pin, ADC
-import colorpicker
 
-bat = ADC(Pin(34))
-bat.atten(ADC.ATTN_11DB)
-bat.width(ADC.WIDTH_12BIT)
+analog_Pin = ADC(Pin(34))
+analog_Pin.atten(ADC.ATTN_11DB)
+analog_Pin.width(ADC.WIDTH_12BIT)
 battery_percentage = 0
-batValue
 
 #Batteri måler
 def batteryPowerReaderConverter():
-        batValue = bat.read()
-        m_spaending = batValue/4095*3.3
-        spaending = m_spaending * 5
-        battery_percentage = spaending/8.4 * 100
-        sleep(1)
+        #Batteri måler
+        analog_val = analog_Pin.read()
+        #print("Raw analog value: ", analog_val)
+        #sleep(1)
+        volts = (analog_val * 0.00089555)*5
+        #print("The voltage is:", volts, "v")
+        battery_percentage = volts*50 - 320
+        print(battery_percentage)
+        return battery_percentage
+battery_percentage = batteryPowerReaderConverter()
+print(battery_percentage)
