@@ -5,7 +5,7 @@ from machine import Pin, I2C
 i2c = I2C(0, sda=Pin(21), scl=Pin(22), freq=400000)
 imu = MPU6050(i2c)
 countTackels = 0
-direction = ''
+direction = ['']
 def tiltSensor(Direction, AntalTackels):
     time.sleep(1)
     # reading values
@@ -48,4 +48,7 @@ def tiltSensor(Direction, AntalTackels):
         print("Rotation around the z axis") 
     time.sleep(0.25)
     print(AntalTackels)
-tiltSensor(Direction=direction, AntalTackels=countTackels)
+    return AntalTackels
+    return Direction
+countTackels = tiltSensor(Direction=direction, AntalTackels=countTackels)
+print(countTackels)

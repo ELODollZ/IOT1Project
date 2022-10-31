@@ -6,7 +6,7 @@ import gps_funktion
 import neopixel
 from colorpicker import set_color
 from Display4X7 import display, variableY, variableX
-from Tiltsensor import tiltSensor, direction, countTackels
+import Tiltsensor
 import Batteryreader
 
 # Her kan i placere globale varibaler, og instanser af klasser
@@ -33,8 +33,8 @@ while True:
         set_color(0,g,0)
         display()
         #print("tilt test")
-        tiltSensor(direction, countTackels)
-        print(countTackels)
+        Tiltsensor.tiltSensor(Tiltsensor.direction, Tiltsensor.countTackels)
+        print(Tiltsensor.countTackels)
         gps_funktion.GPSPrint()
         #print(gps_funktion.GPSPrint())
         #GPSInformation = GPSTiden
