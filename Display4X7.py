@@ -7,10 +7,10 @@ tm = tm1637.TM1637(clk=Pin(4), dio=Pin(2))
 
 tm.brightness(5)
 variableY = "LIVE"
-variableX = Batteryreader.battery_percentage
-variableX = int(variableX)
 
 def display():
+    variableX = Batteryreader.battery_percentage
+    variableX = int(variableX)
     #tm.show(variableY)
     sleep(1)
     tm.show("PPPP")
