@@ -7,6 +7,7 @@ imu = MPU6050(i2c)
 countTackels = 0
 direction = ['']
 def tiltSensor(Direction, AntalTackels):
+    global countTackels
     time.sleep(1)
     # reading values
     acceleration = imu.accel
@@ -19,23 +20,23 @@ def tiltSensor(Direction, AntalTackels):
             print("The x axis points upwards")
         else:
             print("The x axis points downwards")
-            AntalTackels += 1
+            countTackels += 1
             
     if abs(acceleration.y) > 0.8:
         if (acceleration.y > 0):
             print("The y axis points upwards")
-            AntalTackels += 1
+            countTackels += 1
         else:
             print("The y axis points downwards")
-            AntalTackels += 1
+            countTackels += 1
             
     if abs(acceleration.z) > 0.8:
         if (acceleration.z > 0):
             print("The z axis points upwards")
-            AntalTackels += 1
+            countTackels += 1
         else:
             print("The z axis points downwards")
-            AntalTackels += 1
+            countTackels += 1
     # data interpretation (gyroscope)
 
     if abs(gyroscope.x) > 20:
@@ -47,8 +48,8 @@ def tiltSensor(Direction, AntalTackels):
     if abs(gyroscope.z) > 20:
         print("Rotation around the z axis") 
     time.sleep(0.25)
-    print(AntalTackels)
-    return AntalTackels
+    print(countTackels)
+    return countTackels
     return Direction
 countTackels = tiltSensor(Direction=direction, AntalTackels=countTackels)
 print(countTackels)
