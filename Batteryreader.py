@@ -15,10 +15,15 @@ def batteryPowerReaderConverter():
         #Analog Val: 1869
         volts = (analog_val * 5)
         #print("The voltage is:", volts, "v")
-        #9335 volts
-        volts = volts/100
-        battery_percentage = volts
-        print(battery_percentage)
+        #9335 volts 6500 = 2845 dif.
+        if (volts > 6500):
+            #28.45 = 1%
+            volts = ((volts-6500)/(9335-6500))
+            voltages = volts * 100
+            battery_percentage = voltages
+        else:
+            battery_percentage = 0000
+        #print("reader", battery_percentage)
         return battery_percentage
 battery_percentage = batteryPowerReaderConverter()
 #print(battery_percentage)

@@ -15,7 +15,7 @@ g = 255
 b = 255
 GPSInformation = ['','']
 set_color(0,0,0)
-Batteryreader.batteryPowerReaderConverter()
+Batteryreader.battery_percentage = Batteryreader.batteryPowerReaderConverter()
 
 while True:
     try:
