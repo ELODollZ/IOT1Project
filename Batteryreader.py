@@ -11,11 +11,14 @@ def batteryPowerReaderConverter():
         #Batteri måler
         analog_val = analog_Pin.read()
         #print("Raw analog value: ", analog_val)
-        #sleep(1)
-        volts = (analog_val * 0.00089555)*5
+        sleep(1)
+        #Analog Val: 1869
+        volts = (analog_val * 5)
         #print("The voltage is:", volts, "v")
-        battery_percentage = volts*50 - 320
+        #9335 volts
+        volts = volts/100
+        battery_percentage = volts
         print(battery_percentage)
         return battery_percentage
 battery_percentage = batteryPowerReaderConverter()
-print(battery_percentage)
+#print(battery_percentage)

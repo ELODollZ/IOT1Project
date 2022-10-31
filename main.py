@@ -6,7 +6,7 @@ import gps_funktion
 import neopixel
 from colorpicker import set_color
 from Display4X7 import display, variableY, variableX
-from Tiltsensor import tiltSensor
+from Tiltsensor import tiltSensor, direction, countTackels
 import Batteryreader
 
 # Her kan i placere globale varibaler, og instanser af klasser
@@ -16,32 +16,33 @@ b = 255
 GPSInformation = ['','']
 set_color(0,0,0)
 Batteryreader.batteryPowerReaderConverter()
+
 while True:
     try:
         # Denne variabel vil have GPS data når den har fået kontakt til sattellitterne ellers vil den være None
         gps_data = gps_funktion.gps_to_adafruit
         print(f"\ngps_data er: {gps_data}")
-        #set_color(0,g,0)
+        mqtt.web_print(gps_data, 'dani636e/feeds/iot.iotmaps')
+        set_color(r, 0, 0)
+        sleep(4)# vent mere end 3 sekunder mellem hver besked der sendes til adafruit
+        Batteryreader.batteryPowerReaderConverter()
         print("The battery percentage is:", Batteryreader.battery_percentage, "%")
         #print("Display test", variableY)
-        
+        mqtt.web_print(Batteryreader.battery_percentage, 'dani636e/feeds/iot.iotbatteri')
+        sleep(4)
+        set_color(0,g,0)
         display()
         #print("tilt test")
-        tiltSensor()
-        #set_color(r, 0, 0)
-        
+        tiltSensor(direction, countTackels)
+        print(countTackels)
         gps_funktion.GPSPrint()
-        print(gps_funktion.GPSPrint())
+        #print(gps_funktion.GPSPrint())
         #GPSInformation = GPSTiden
-        print(GPSInformation)
-        mqtt.web_print(GPSInformation, 'dani636e/feeds/iot.iotfeed/csv')
-        GPSInformation = gps_funktion.GPSSatellitesUsed
-        mqtt.web_print(GPSInformation, 'dani636e/feeds/iot.iotfeed/csv')
-        sleep(4)
-        Batteryreader.batteryPowerReaderConverter()
-        mqtt.web_print(Batteryreader.battery_percentage, 'dani636e/feeds/iot.iotbatteri/csv')
-        mqtt.web_print(gps_data, 'dani636e/feeds/iot.iotmaps/csv')
-        sleep(4)# vent mere end 3 sekunder mellem hver besked der sendes til adafruit
+        #print(GPSInformation)
+        #mqtt.web_print(GPSInformation, 'dani636e/feeds/iot.iotfeed')
+        #GPSInformation = gps_funktion.GPSSatellitesUsed
+        #mqtt.web_print(GPSInformation, 'dani636e/feeds/iot.iotfeed')
+        set_color(r, g, b)
         
         # Jeres kode skal slutte her
         sleep(0.5)
