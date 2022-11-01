@@ -5,7 +5,7 @@ from time import sleep
 import gps_funktion
 import neopixel
 from colorpicker import set_color
-from Display4X7 import display, variableY, variableX
+from Display4X7 import display, variableY
 import Tiltsensor
 import Batteryreader
 

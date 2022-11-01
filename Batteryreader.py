@@ -22,7 +22,7 @@ def batteryPowerReaderConverter():
             voltages = volts * 100
             battery_percentage = voltages
         else:
-            battery_percentage = 0000
+            battery_percentage = 000
         #print("reader", battery_percentage)
         return battery_percentage
 battery_percentage = batteryPowerReaderConverter()
