@@ -1,20 +1,20 @@
 import umqtt_robust2 as mqtt
 from machine import Pin, ADC
 from time import sleep
-from GPSInformation import gps_main, GPSPrint
+#from GPSInformation import gps_main, GPSPrint, GPSSatellitesUsed, GPSTiden, gps_to_adafruit
 import gps_funktion
-#import neopixel
-#from colorpicker import set_color
-#from Display4X7 import display, variableY, variableX
-#import Tiltsensor
-#import Batteryreader
+import neopixel
+from colorpicker import set_color
+from Display4X7 import display, variableY
+import Tiltsensor
+import Batteryreader
 
 # Her kan i placere globale varibaler, og instanser af klasser
-# r = 255     
-# g = 255
-# b = 255
+r = 255     
+g = 255
+b = 255
 GPSInformation = ['','']
-#set_color(0,0,0)
+set_color(0,0,0)
 #Batteryreader.battery_percentage = Batteryreader.batteryPowerReaderConverter()
 
 while True:
@@ -22,30 +22,29 @@ while True:
         # Denne variabel vil have GPS data når den har fået kontakt til sattellitterne ellers vil den være None
         gps_data = gps_funktion.gps_to_adafruit
         print(f"\ngps_data er: {gps_data}")
-        print("Test")
+        sleep(4)
         mqtt.web_print(gps_data, 'dani636e/feeds/iot.iotmaps/csv')
-        print("Test1")
-        #set_color(r, 0, 0)
+        set_color(r, 0, 0)
         sleep(4)# vent mere end 3 sekunder mellem hver besked der sendes til adafruit
-        #Batteryreader.batteryPowerReaderConverter()
-        #print("The battery percentage is:", Batteryreader.battery_percentage, "%")
+        Batteryreader.battery_percentage = Batteryreader.batteryPowerReaderConverter()
+        print("The battery percentage is:", Batteryreader.battery_percentage, "%")
         #print("Display test", variableY)
-        #mqtt.web_print(Batteryreader.battery_percentage, 'dani636e/feeds/iot.iotbatteri')
-        #sleep(4)
-        #set_color(0,g,0)
-        #display()
+        mqtt.web_print(Batteryreader.battery_percentage, 'dani636e/feeds/iot.iotbatteri')
+        sleep(4)
+        set_color(0,g,0)
+        display()
         #print("tilt test")
-        #Tiltsensor.tiltSensor(Tiltsensor.direction, Tiltsensor.countTackels)
-        #print(Tiltsensor.countTackels)
-        gps_funktion.GPSPrint()
-        #print(gps_funktion.GPSPrint())
-        #GPSInformation = GPSTiden
-        #print(GPSInformation)
-        #mqtt.web_print(GPSInformation, 'dani636e/feeds/iot.iotfeed')
-        #GPSInformation = gps_funktion.GPSSatellitesUsed
-        #mqtt.web_print(GPSInformation, 'dani636e/feeds/iot.iotfeed')
-        #set_color(r, g, b)
-        print("Test2")
+        Tiltsensor.tiltSensor(Tiltsensor.direction, Tiltsensor.countTackels)
+        print(Tiltsensor.countTackels)
+        
+        gps_funktion.gpsSecondFunktion()
+        GPSInformation = gps_funktion.GPSTiden
+        #print(gps_funktion.gpsSecondFunktion)
+        mqtt.web_print(GPSInformation, 'dani636e/feeds/iot.iotfeed')
+        GPSInformation = gps_funktion.GPSSatellitesUsed
+        sleep(4)
+        mqtt.web_print(GPSInformation, 'dani636e/feeds/iot.iotfeed')
+        set_color(r, g, b)
         # Jeres kode skal slutte her
         sleep(0.5)
         if len(mqtt.besked) != 0: # Her nulstilles indkommende beskeder
