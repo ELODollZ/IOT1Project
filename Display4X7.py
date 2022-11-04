@@ -12,8 +12,7 @@ tm.show("PPPP")
 def display():
     variableX = Batteryreader.battery_percentage
     variableX = int(variableX)
-    #tm.show(variableY)
-    if(variableX < 100):
+    if(variableX >= 100):
         tm.show(("{}{}".format("0", variableX, "P")))
     else:
         tm.show(("{}{}".format(variableX,"P")))

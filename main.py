@@ -15,7 +15,6 @@ g = 255
 b = 255
 GPSInformation = ['','']
 set_color(0,0,0)
-#Batteryreader.battery_percentage = Batteryreader.batteryPowerReaderConverter()
 
 while True:
     try:
@@ -28,18 +27,15 @@ while True:
         sleep(4)# vent mere end 3 sekunder mellem hver besked der sendes til adafruit
         Batteryreader.battery_percentage = Batteryreader.batteryPowerReaderConverter()
         print("The battery percentage is:", Batteryreader.battery_percentage, "%")
-        #print("Display test", variableY)
         mqtt.web_print(Batteryreader.battery_percentage, 'dani636e/feeds/iot.iotbatteri')
         sleep(4)
         set_color(0,g,0)
         display()
-        #print("tilt test")
         Tiltsensor.tiltSensor(Tiltsensor.direction, Tiltsensor.countTackels)
         print(Tiltsensor.countTackels)
         
         gps_funktion.gpsSecondFunktion()
         GPSInformation = gps_funktion.GPSTiden
-        #print(gps_funktion.gpsSecondFunktion)
         mqtt.web_print(GPSInformation, 'dani636e/feeds/iot.iotfeed')
         GPSInformation = gps_funktion.GPSSatellitesUsed
         sleep(4)

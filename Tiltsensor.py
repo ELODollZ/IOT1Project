@@ -9,7 +9,6 @@ direction = ['']
 def tiltSensor(Direction, AntalTackels):
     global countTackels
     time.sleep(1)
-    # reading values
     acceleration = imu.accel
     gyroscope = imu.gyro  
     direction = print("Acceleration x: ", round(acceleration.x,2), " y:", round(acceleration.y,2), "z: ", round(acceleration.z,2))
