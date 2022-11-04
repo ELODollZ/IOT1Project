@@ -51,4 +51,3 @@ def tiltSensor(Direction, AntalTackels):
     return countTackels
     return Direction
 countTackels = tiltSensor(Direction=direction, AntalTackels=countTackels)
-print(countTackels)
