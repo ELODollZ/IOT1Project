@@ -18,11 +18,11 @@ while True:
         gps_data = gps_funktion.gps_to_adafruit
         print(f"\ngps_data er: {gps_data}")
         sleep(4)
-        mqtt.web_print(gps_data, 'dani636e/feeds/iot.iotmaps/csv')
+        mqtt.web_print(gps_data, 'NyboMønster/feeds/iot.iotmaps/csv')
         sleep(4)# vent mere end 3 sekunder mellem hver besked der sendes til adafruit
         Batteryreader.battery_percentage = Batteryreader.batteryPowerReaderConverter()
         print("The battery percentage is:", Batteryreader.battery_percentage, "%")
-        mqtt.web_print(Batteryreader.battery_percentage, 'dani636e/feeds/iot.iotbatteri')
+        mqtt.web_print(Batteryreader.battery_percentage, 'NyboMønster/feeds/iot.iotbatteri')
         sleep(4)
         display()
         
